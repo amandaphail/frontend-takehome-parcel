@@ -20,6 +20,7 @@ async function getSearchResults(query) {
 
 function listResults(results) {
   console.log(results)
+  removeOldResults()
 
   const list = document.createElement('div')
   list.classList.add('list')
@@ -27,7 +28,6 @@ function listResults(results) {
 
 
   results.forEach((result) => {
-    //remove results function
 
     const ul = document.createElement('ul')
     ul.classList.add('item')
@@ -44,7 +44,11 @@ function listResults(results) {
     gemInfo.classList.add('gemInfo')
     ul.appendChild(gemInfo)
 
-
+    const saveButton = document.createElement('button')
+    // saveButton.innerText('Save')
+    saveButton.classList.add('save')
+    ul.appendChild(saveButton)
+    //saveButton onClick
   })
 
 }
@@ -54,3 +58,9 @@ form.addEventListener('submit', (event) => {
   getSearchResults(input.value)
 })
 //will have user input here on submit
+
+function removeOldResults() {
+  while (listing.firstChild) {
+    listing.removeChild(listing.firstChild)
+  }
+}
