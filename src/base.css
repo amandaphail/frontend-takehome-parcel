@@ -2,12 +2,21 @@ body {
   background: #eee;
   font-family: Georgia;
   margin: 0;
-  padding: 50px;
+  /* padding: 50px; */
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: grey;
+  border-bottom: 1px solid black;
+  padding: 30px;
 }
 
 .big-lorem-ipsum {
   font-size: 50px;
   font-weight: 300;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   max-width: 15em;
 }
