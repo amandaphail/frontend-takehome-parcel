@@ -1,19 +1,16 @@
 const BASE_URL = 'http://localhost:3000'
 
-// const submit = document.querySelector('.submit')
 const listing = document.querySelector('.listing')
 const form = document.querySelector('.search-section')
 const input = document.querySelector('#blank')
 const savedPageButton = document.querySelector('#saved')
 
 
-// localStorage.clear()
 
 async function getSearchResults(query) {
   try {
     const searchResult = await axios.get(`${BASE_URL}/api/v1/search.json?query=${query}`)
     
-    // console.log(searchResult.data)
     listResults(searchResult.data)
 
   } catch (err) {
@@ -23,7 +20,6 @@ async function getSearchResults(query) {
 
 
 function listResults(results) {
-  console.log(results)
   removeItems()
 
   const list = document.createElement('div')
@@ -83,36 +79,24 @@ function savedItems(result) {
   }
 
   let savedGems =  JSON.parse(localStorage.getItem('savedGems') || '[]');
-  console.log("# of saved gems: " + savedGems.length);
 
   savedGems.push(savedGem);
 
   localStorage.setItem('savedGems', JSON.stringify(savedGems));
 
-  // console.log("Added gem" + savedGem.name);
-
-  // savedGems.forEach(function(gem, index) {
-  //     console.log("[" + index + "]: " + gem.savedGemName);
-  //   });
-  
-  console.log(savedGems)
   alert(`${savedGem.name} saved`)
   
 }
 
 function unsaveItem(result) {
   const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
-  console.log(savedGems)
 
   function unsaveName(gem) {
-    console.log(gem)
     return gem.name === result.name
   }
 
   let unsave = savedGems.find(unsaveName)
-  console.log(unsave)
   let unsaveIndex = savedGems.indexOf(unsave)
-  console.log(unsaveIndex)
   if (unsaveIndex >= 0 ) {
     savedGems.splice(unsaveIndex, 1);
     localStorage.setItem('savedGems', JSON.stringify(savedGems));
@@ -138,7 +122,6 @@ function listSavedItems() {
   list.appendChild(savedTitle)
 
   if (savedGems.length > 0) {
-    console.log("gem exists")
 
     
     const removeAllButton = document.createElement('button')
@@ -151,9 +134,7 @@ function listSavedItems() {
     list.appendChild(removeAllButton)
 
 
-    //map over local storage array to get each saved gems info
     savedGems.forEach((gem) => {
-      // console.log(gem.name)
 
     const ul = document.createElement('ul')
     ul.classList.add('item')
@@ -181,7 +162,6 @@ function listSavedItems() {
   })
   
   } else {
-    console.log("gem does not exist")
     const noSaved = document.createElement('h3')
     noSaved.classList.add('h3')
     noSaved.innerText = "You do not have any saved gems!"
@@ -190,12 +170,9 @@ function listSavedItems() {
 }
 
 function removeItem(gemIndex) {
-  console.log(gemIndex)
 
   const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
-  console.log(savedGems[gemIndex])
   savedGems.splice(gemIndex, 1);
-  console.log(savedGems)
   localStorage.setItem('savedGems', JSON.stringify(savedGems));
 
   listSavedItems()
