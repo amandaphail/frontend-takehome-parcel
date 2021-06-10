@@ -6,6 +6,9 @@ const form = document.querySelector('.search-section')
 const input = document.querySelector('#blank')
 const savedPageButton = document.querySelector('#saved')
 
+
+// localStorage.clear()
+
 async function getSearchResults(query) {
   try {
     const searchResult = await axios.get(`${BASE_URL}/api/v1/search.json?query=${query}`)
@@ -65,20 +68,46 @@ function listResults(results) {
 
 
 function savedItems(result) {
+
+
+  const savedGem = {
+    name: result.name,
+    info: result.info,
+  }
+
+  let savedGems =  JSON.parse(localStorage.getItem('savedGems') || '[]');
+  console.log("# of saved gems: " + savedGems.length);
+
   
-  localStorage.setItem('savedGemName', result.name);
-  localStorage.setItem('savedGemInfo', result.info);
-  // const name = localStorage.getItem('savedGemName');
-  // const info = localStorage.getItem('savedGemInfo');
-      
-      // alert(`Saved ${name} - ${info} to localStorage`)
+  savedGems.push(savedGem);
+
+  localStorage.setItem('savedGems', JSON.stringify(savedGems));
+
+  // console.log("Added gem" + savedGem.name);
+
+  // savedGems.forEach(function(gem, index) {
+  //     console.log("[" + index + "]: " + gem.savedGemName);
+  //   });
+  
+console.log(savedGems)
+
+
+  // localStorage.setItem('savedGemName', result.name);
+  // localStorage.setItem('savedGemInfo', result.info);
 
 }
 
 function listSavedItems() {
   removeItems()
-  const name = localStorage.getItem('savedGemName');
-  const info = localStorage.getItem('savedGemInfo');
+  // const name = localStorage.getItem('savedGemName');
+  // const info = localStorage.getItem('savedGemInfo');
+  const object = JSON.parse(localStorage.getItem('savedGems') || '[]');
+  console.log(object)
+  console.log(object[0].name)
+
+
+  let myStorage = window.localStorage;
+  console.log(myStorage)
 
   const list = document.createElement('div')
   list.classList.add('list')
@@ -90,7 +119,7 @@ function listSavedItems() {
   savedTitle.innerText = "Saved Gems"
   list.appendChild(savedTitle)
 
-  if (name) {
+  if (object.length > 0) {
     console.log("gem exists")
     
     const removeAllButton = document.createElement('button')
