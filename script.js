@@ -53,6 +53,11 @@ function listResults(results) {
     gemInfo.classList.add('gemInfo')
     ul.appendChild(gemInfo)
 
+
+    const buttons = document.createElement('div')
+    buttons.classList.add('buttons')
+    ul.appendChild(buttons)
+
     const saveButton = document.createElement('button')
     saveButton.innerHTML = 'Save'
     saveButton.classList.add('save')
@@ -60,7 +65,7 @@ function listResults(results) {
     saveButton.onclick = function () {
       savedItems(result)
     };
-    ul.appendChild(saveButton)
+    buttons.appendChild(saveButton)
 
     const unsaveButton = document.createElement('button')
     unsaveButton.innerHTML = 'Unsave'
@@ -69,7 +74,7 @@ function listResults(results) {
     unsaveButton.onclick = function () {
       unsaveItem(result)
     };
-    ul.appendChild(unsaveButton)
+    buttons.appendChild(unsaveButton)
 
   })
 

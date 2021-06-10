@@ -38,9 +38,22 @@ body {
 
 li {
   list-style-type: none;
+  margin: 20px 0 20px 0;
 }
 
+ul {
+  margin: 50px 0 50px 0;
+  /* height: 150px;
+  display: flex;
+  flex-direction:  */
+}
 .savedName,
 .gemName {
   font-size: 30px;
+}
+
+.buttons {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
 }
