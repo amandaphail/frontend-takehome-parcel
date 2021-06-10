@@ -104,16 +104,21 @@ function unsaveItem(result) {
   console.log(savedGems)
 
   function unsaveName(gem) {
+    console.log(gem)
     return gem.name === result.name
   }
 
   let unsave = savedGems.find(unsaveName)
+  console.log(unsave)
   let unsaveIndex = savedGems.indexOf(unsave)
-
-  savedGems.splice(unsaveIndex, 1);
-  localStorage.setItem('savedGems', JSON.stringify(savedGems));
-
-  alert('No longer saved')
+  console.log(unsaveIndex)
+  if (unsaveIndex >= 0 ) {
+    savedGems.splice(unsaveIndex, 1);
+    localStorage.setItem('savedGems', JSON.stringify(savedGems));
+    alert(`${result.name} is no longer saved`)
+  } else {
+    alert(`${result.name} was never saved!`)
+  }
 }
 
 function listSavedItems() {
