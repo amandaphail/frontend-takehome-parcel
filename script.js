@@ -67,13 +67,12 @@ function listResults(results) {
 function savedItems(result) {
   
   localStorage.setItem('savedGemName', result.name);
-      localStorage.setItem('savedGemInfo', result.info);
-      const name = localStorage.getItem('savedGemName');
-      const info = localStorage.getItem('savedGemInfo');
+  localStorage.setItem('savedGemInfo', result.info);
+  // const name = localStorage.getItem('savedGemName');
+  // const info = localStorage.getItem('savedGemInfo');
       
-      alert(`Saved ${name} - ${info} to localStorage`)
+      // alert(`Saved ${name} - ${info} to localStorage`)
 
-      // localStorage.clear();
 }
 
 function listSavedItems() {
@@ -94,11 +93,19 @@ function listSavedItems() {
   if (name) {
     console.log("gem exists")
     
+    const removeAllButton = document.createElement('button')
+    removeAllButton.innerHTML = 'Delete All'
+    removeAllButton.classList.add('delete')
 
-  const ul = document.createElement('ul')
+    removeAllButton.onclick = function () {
+      removeAllItems()
+    };
+    list.appendChild(removeAllButton)
+
+
+    const ul = document.createElement('ul')
     ul.classList.add('item')
     list.appendChild(ul)
-
 
     const savedName = document.createElement('li')
     savedName.innerText = name
@@ -122,16 +129,20 @@ function listSavedItems() {
   } else {
     console.log("gem does not exist")
     const noSaved = document.createElement('h3')
-  noSaved.classList.add('h3')
-  noSaved.innerText = "You do not have any saved gems!"
-  list.appendChild(noSaved)
+    noSaved.classList.add('h3')
+    noSaved.innerText = "You do not have any saved gems!"
+    list.appendChild(noSaved)
   }
 }
 
 function removeItem() {
-  // console.log(name, info)
   localStorage.removeItem('savedGemName');
   localStorage.removeItem('savedGemInfo');
+  listSavedItems()
+}
+
+function removeAllItems() {
+  localStorage.clear();
   listSavedItems()
 }
 
