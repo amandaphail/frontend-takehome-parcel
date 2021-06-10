@@ -27,6 +27,11 @@ function listResults(results) {
   list.classList.add('list')
   listing.appendChild(list)
 
+  const resultsTitle = document.createElement('h1')
+  resultsTitle.classList.add('h1')
+  resultsTitle.innerText = "Gem Results"
+  list.appendChild(resultsTitle)
+
 
   results.forEach((result) => {
 
@@ -53,7 +58,7 @@ function listResults(results) {
       savedItems(result)
     };
     ul.appendChild(saveButton)
-    
+
   })
 
 }
@@ -80,6 +85,11 @@ function listSavedItems() {
   list.classList.add('list')
   listing.appendChild(list)
 
+  const savedTitle = document.createElement('h1')
+  savedTitle.classList.add('h1')
+  savedTitle.innerText = "Saved Gems"
+  list.appendChild(savedTitle)
+
   const ul = document.createElement('ul')
     ul.classList.add('item')
     list.appendChild(ul)
@@ -95,7 +105,25 @@ function listSavedItems() {
     savedInfo.classList.add('savedInfo')
     ul.appendChild(savedInfo)
 
+    const removeButton = document.createElement('button')
+    removeButton.innerHTML = 'Delete'
+    removeButton.classList.add('delete')
+
+    removeButton.onclick = function () {
+      removeItem()
+    };
+    ul.appendChild(removeButton)
+  
 }
+
+function removeItem() {
+  // console.log(name, info)
+  localStorage.removeItem('savedGemName');
+  localStorage.removeItem('savedGemInfo');
+
+}
+
+
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -113,5 +141,3 @@ function removeItems() {
     listing.removeChild(listing.firstChild)
   }
 }
-
-//removeSaved(){}
