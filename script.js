@@ -176,17 +176,10 @@ function removeItem(gemIndex) {
 
   const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
   console.log(savedGems[gemIndex])
-
   savedGems.splice(gemIndex, 1);
   console.log(savedGems)
   localStorage.setItem('savedGems', JSON.stringify(savedGems));
 
-  // console.log(gem.name)
-  // name = `${gem.name}`
-  // let item = savedGems.find((name) =>{})
-  // console.log(item)
-  // localStorage.removeItem(savedGems[index]);
-  // localStorage.removeItem('savedGemInfo');
   listSavedItems()
 }
 
