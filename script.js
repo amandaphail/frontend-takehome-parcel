@@ -45,10 +45,14 @@ function listResults(results) {
     ul.appendChild(gemInfo)
 
     const saveButton = document.createElement('button')
-    // saveButton.innerText('Save')
+    saveButton.innerHTML = 'Save'
     saveButton.classList.add('save')
-    ul.appendChild(saveButton)
     //saveButton onClick
+    saveButton.onclick = function(){
+      alert('clicked!');
+    };
+
+    ul.appendChild(saveButton)
   })
 
 }
@@ -57,7 +61,7 @@ form.addEventListener('submit', (event) => {
   event.preventDefault()
   getSearchResults(input.value)
 })
-//will have user input here on submit
+
 
 function removeOldResults() {
   while (listing.firstChild) {
