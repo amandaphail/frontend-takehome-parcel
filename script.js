@@ -174,8 +174,8 @@ function listSavedItems() {
   })
   
   } else {
-    const noSaved = document.createElement('h3')
-    noSaved.classList.add('h3')
+    const noSaved = document.createElement('h4')
+    noSaved.classList.add('h4')
     noSaved.innerText = "You do not have any saved gems!"
     list.appendChild(noSaved)
   }
