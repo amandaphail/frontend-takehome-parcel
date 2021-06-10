@@ -85,10 +85,15 @@ function listSavedItems() {
   list.classList.add('list')
   listing.appendChild(list)
 
+
   const savedTitle = document.createElement('h1')
   savedTitle.classList.add('h1')
   savedTitle.innerText = "Saved Gems"
   list.appendChild(savedTitle)
+
+  if (name) {
+    console.log("gem exists")
+    
 
   const ul = document.createElement('ul')
     ul.classList.add('item')
@@ -114,13 +119,20 @@ function listSavedItems() {
     };
     ul.appendChild(removeButton)
   
+  } else {
+    console.log("gem does not exist")
+    const noSaved = document.createElement('h3')
+  noSaved.classList.add('h3')
+  noSaved.innerText = "You do not have any saved gems!"
+  list.appendChild(noSaved)
+  }
 }
 
 function removeItem() {
   // console.log(name, info)
   localStorage.removeItem('savedGemName');
   localStorage.removeItem('savedGemInfo');
-
+  listSavedItems()
 }
 
 
