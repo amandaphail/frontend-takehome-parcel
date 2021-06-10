@@ -48,14 +48,25 @@ function listResults(results) {
     saveButton.innerHTML = 'Save'
     saveButton.classList.add('save')
     //saveButton onClick
-    saveButton.onclick = function(){
-      alert('clicked!');
+    saveButton.onclick = function () {
+      //make this its own function
+      // alert('clicked!');
+      localStorage.setItem('savedGemName', result.name);
+      localStorage.setItem('savedGemInfo', result.info);
+      const name = localStorage.getItem('savedGemName');
+      const info = localStorage.getItem('savedGemInfo');
+      
+      alert(`Saved ${name} - ${info} to localStorage`)
+
+      localStorage.clear();
+
     };
 
     ul.appendChild(saveButton)
   })
 
 }
+
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
