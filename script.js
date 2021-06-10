@@ -4,6 +4,7 @@ const BASE_URL = 'http://localhost:3000'
 const listing = document.querySelector('.listing')
 const form = document.querySelector('.search-section')
 const input = document.querySelector('#blank')
+const savedPageButton = document.querySelector('#saved')
 
 async function getSearchResults(query) {
   try {
@@ -20,7 +21,7 @@ async function getSearchResults(query) {
 
 function listResults(results) {
   console.log(results)
-  removeOldResults()
+  removeItems()
 
   const list = document.createElement('div')
   list.classList.add('list')
@@ -47,35 +48,70 @@ function listResults(results) {
     const saveButton = document.createElement('button')
     saveButton.innerHTML = 'Save'
     saveButton.classList.add('save')
-    //saveButton onClick
+
     saveButton.onclick = function () {
-      //make this its own function
-      // alert('clicked!');
-      localStorage.setItem('savedGemName', result.name);
+      savedItems(result)
+    };
+    ul.appendChild(saveButton)
+    
+  })
+
+}
+
+
+function savedItems(result) {
+  
+  localStorage.setItem('savedGemName', result.name);
       localStorage.setItem('savedGemInfo', result.info);
       const name = localStorage.getItem('savedGemName');
       const info = localStorage.getItem('savedGemInfo');
       
       alert(`Saved ${name} - ${info} to localStorage`)
 
-      localStorage.clear();
-
-    };
-
-    ul.appendChild(saveButton)
-  })
-
+      // localStorage.clear();
 }
 
+function listSavedItems() {
+  removeItems()
+  const name = localStorage.getItem('savedGemName');
+  const info = localStorage.getItem('savedGemInfo');
+
+  const list = document.createElement('div')
+  list.classList.add('list')
+  listing.appendChild(list)
+
+  const ul = document.createElement('ul')
+    ul.classList.add('item')
+    list.appendChild(ul)
+
+
+    const savedName = document.createElement('li')
+    savedName.innerText = name
+    savedName.classList.add("savedName")
+    ul.appendChild(savedName)
+
+    const savedInfo = document.createElement('li')
+    savedInfo.innerText = info
+    savedInfo.classList.add('savedInfo')
+    ul.appendChild(savedInfo)
+
+}
 
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   getSearchResults(input.value)
 })
 
+savedPageButton.addEventListener('click', (event) => {
+  event.preventDefault()
+  listSavedItems()
+})
 
-function removeOldResults() {
+
+function removeItems() {
   while (listing.firstChild) {
     listing.removeChild(listing.firstChild)
   }
 }
+
+//removeSaved(){}
