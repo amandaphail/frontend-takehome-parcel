@@ -95,7 +95,8 @@ function savedItems(result) {
   //     console.log("[" + index + "]: " + gem.savedGemName);
   //   });
   
-console.log(savedGems)
+  console.log(savedGems)
+  alert(`${savedGem.name} saved`)
   
 }
 
