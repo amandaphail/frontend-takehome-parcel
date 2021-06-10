@@ -101,13 +101,13 @@ function listSavedItems() {
   removeItems()
   // const name = localStorage.getItem('savedGemName');
   // const info = localStorage.getItem('savedGemInfo');
-  const object = JSON.parse(localStorage.getItem('savedGems') || '[]');
-  console.log(object)
-  console.log(object[0].name)
+  const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
+  // console.log(savedGems)
+  // console.log(savedGems[0].name)
 
 
-  let myStorage = window.localStorage;
-  console.log(myStorage)
+  // let myStorage = window.localStorage;
+  // console.log(myStorage)
 
   const list = document.createElement('div')
   list.classList.add('list')
@@ -116,11 +116,12 @@ function listSavedItems() {
 
   const savedTitle = document.createElement('h1')
   savedTitle.classList.add('h1')
-  savedTitle.innerText = "Saved Gems"
+  savedTitle.innerText = "Your Saved Gems"
   list.appendChild(savedTitle)
 
-  if (object.length > 0) {
+  if (savedGems.length > 0) {
     console.log("gem exists")
+
     
     const removeAllButton = document.createElement('button')
     removeAllButton.innerHTML = 'Delete All'
@@ -132,17 +133,21 @@ function listSavedItems() {
     list.appendChild(removeAllButton)
 
 
+    //map over local storage array to get each saved gems info
+    savedGems.forEach((gem) => {
+      console.log(gem.name)
+
     const ul = document.createElement('ul')
     ul.classList.add('item')
     list.appendChild(ul)
 
     const savedName = document.createElement('li')
-    savedName.innerText = name
+    savedName.innerText = gem.name
     savedName.classList.add("savedName")
     ul.appendChild(savedName)
 
     const savedInfo = document.createElement('li')
-    savedInfo.innerText = info
+    savedInfo.innerText = gem.info
     savedInfo.classList.add('savedInfo')
     ul.appendChild(savedInfo)
 
@@ -154,6 +159,7 @@ function listSavedItems() {
       removeItem()
     };
     ul.appendChild(removeButton)
+  })
   
   } else {
     console.log("gem does not exist")
