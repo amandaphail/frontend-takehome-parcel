@@ -22,14 +22,18 @@ async function getSearchResults(query) {
 function listResults(results) {
   removeItems()
 
-  const list = document.createElement('div')
-  list.classList.add('list')
-  listing.appendChild(list)
+  const page = document.createElement('div')
+  page.classList.add('page')
+  listing.appendChild(page)
 
   const resultsTitle = document.createElement('h1')
   resultsTitle.classList.add('h1')
   resultsTitle.innerText = "Gem Results"
-  list.appendChild(resultsTitle)
+  page.appendChild(resultsTitle)
+
+  const list = document.createElement('div')
+  list.classList.add('list')
+  page.appendChild(list)
 
 
   results.forEach((result) => {
@@ -110,16 +114,19 @@ function listSavedItems() {
   removeItems()
   const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
   
-
-  const list = document.createElement('div')
-  list.classList.add('list')
-  listing.appendChild(list)
-
-
+  const page = document.createElement('div')
+  page.classList.add('page')
+  listing.appendChild(page)
+  
   const savedTitle = document.createElement('h1')
   savedTitle.classList.add('h1')
   savedTitle.innerText = "Your Saved Gems"
-  list.appendChild(savedTitle)
+  page.appendChild(savedTitle)
+
+  const list = document.createElement('div')
+  list.classList.add('list')
+  page.appendChild(list)
+
 
   if (savedGems.length > 0) {
 
@@ -131,7 +138,7 @@ function listSavedItems() {
     removeAllButton.onclick = function () {
       removeAllItems()
     };
-    list.appendChild(removeAllButton)
+    page.insertBefore(removeAllButton, list)
 
 
     savedGems.forEach((gem) => {

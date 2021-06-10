@@ -9,14 +9,38 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: grey;
-  border-bottom: 1px solid black;
+  background-color: rgb(43, 130, 180);
+  /* border-bottom: 1px solid black; */
   padding: 30px;
 }
 
 .big-lorem-ipsum {
   font-size: 50px;
   font-weight: 300;
+  color: #fff;
   /* margin: 0 auto; */
   max-width: 15em;
+}
+.listing {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  /* background-color: rgb(191, 226, 214); */
+}
+
+li {
+  list-style-type: none;
+}
+
+.savedName,
+.gemName {
+  font-size: 30px;
 }
