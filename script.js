@@ -62,14 +62,21 @@ function listResults(results) {
     };
     ul.appendChild(saveButton)
 
+    const unsaveButton = document.createElement('button')
+    unsaveButton.innerHTML = 'Unsave'
+    unsaveButton.classList.add('unsave')
+
+    unsaveButton.onclick = function () {
+      unsaveItem(result)
+    };
+    ul.appendChild(unsaveButton)
+
   })
 
 }
 
 
 function savedItems(result) {
-
-
   const savedGem = {
     name: result.name,
     info: result.info,
@@ -78,7 +85,6 @@ function savedItems(result) {
   let savedGems =  JSON.parse(localStorage.getItem('savedGems') || '[]');
   console.log("# of saved gems: " + savedGems.length);
 
-  
   savedGems.push(savedGem);
 
   localStorage.setItem('savedGems', JSON.stringify(savedGems));
@@ -90,24 +96,30 @@ function savedItems(result) {
   //   });
   
 console.log(savedGems)
+  
+}
 
+function unsaveItem(result) {
+  const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
+  console.log(savedGems)
 
-  // localStorage.setItem('savedGemName', result.name);
-  // localStorage.setItem('savedGemInfo', result.info);
+  function unsaveName(gem) {
+    return gem.name === result.name
+  }
 
+  let unsave = savedGems.find(unsaveName)
+  let unsaveIndex = savedGems.indexOf(unsave)
+
+  savedGems.splice(unsaveIndex, 1);
+  localStorage.setItem('savedGems', JSON.stringify(savedGems));
+
+  alert('No longer saved')
 }
 
 function listSavedItems() {
   removeItems()
-  // const name = localStorage.getItem('savedGemName');
-  // const info = localStorage.getItem('savedGemInfo');
   const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
-  // console.log(savedGems)
-  // console.log(savedGems[0].name)
-
-
-  // let myStorage = window.localStorage;
-  // console.log(myStorage)
+  
 
   const list = document.createElement('div')
   list.classList.add('list')
