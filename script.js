@@ -2,6 +2,8 @@ const BASE_URL = 'http://localhost:3000'
 
 // const submit = document.querySelector('.submit')
 const listing = document.querySelector('.listing')
+const form = document.querySelector('.search-section')
+const input = document.querySelector('#blank')
 
 async function getSearchResults(query) {
   try {
@@ -14,6 +16,7 @@ async function getSearchResults(query) {
     console.log("Error Message:", err.message)
   }
 }
+
 
 function listResults(results) {
   console.log(results)
@@ -37,14 +40,17 @@ function listResults(results) {
     ul.appendChild(gemName)
 
     const gemInfo = document.createElement('li')
-    
+    gemInfo.innerText = result.info
+    gemInfo.classList.add('gemInfo')
+    ul.appendChild(gemInfo)
 
 
   })
 
 }
 
-
-getSearchResults("kitten")
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  getSearchResults(input.value)
+})
 //will have user input here on submit
-//display on page: name, info
