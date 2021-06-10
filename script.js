@@ -135,7 +135,7 @@ function listSavedItems() {
 
     //map over local storage array to get each saved gems info
     savedGems.forEach((gem) => {
-      console.log(gem.name)
+      // console.log(gem.name)
 
     const ul = document.createElement('ul')
     ul.classList.add('item')
@@ -156,7 +156,8 @@ function listSavedItems() {
     removeButton.classList.add('delete')
 
     removeButton.onclick = function () {
-      removeItem()
+      let gemIndex = savedGems.indexOf(gem)
+      removeItem(gemIndex)
     };
     ul.appendChild(removeButton)
   })
@@ -170,9 +171,22 @@ function listSavedItems() {
   }
 }
 
-function removeItem() {
-  localStorage.removeItem('savedGemName');
-  localStorage.removeItem('savedGemInfo');
+function removeItem(gemIndex) {
+  console.log(gemIndex)
+
+  const savedGems = JSON.parse(localStorage.getItem('savedGems') || '[]');
+  console.log(savedGems[gemIndex])
+
+  savedGems.splice(gemIndex, 1);
+  console.log(savedGems)
+  localStorage.setItem('savedGems', JSON.stringify(savedGems));
+
+  // console.log(gem.name)
+  // name = `${gem.name}`
+  // let item = savedGems.find((name) =>{})
+  // console.log(item)
+  // localStorage.removeItem(savedGems[index]);
+  // localStorage.removeItem('savedGemInfo');
   listSavedItems()
 }
 
